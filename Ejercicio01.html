@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="" class="" onsubmit="return calcular_edad();">
+        <div class="form-group">
+            <label for="form-label"> Ingrese su edad
+                <input type="number" name="" id="edad" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Calcular edad</button>
+
+        </div>
+    </form>
+
+    <span id="resultado"></span>
+
+    <script src="js/bootstrap.js"></script>
+    <script>
+        function calcular_edad() {
+            var edad = parseInt(document.getElementById("edad").value);
+            var resultado = document.getElementById("resultado");
+            var resul;
+            if (edad >= 18) {
+                resul = "Es mayor de edad"
+            }
+            else if (edad >= 0 && edad < 18) {
+                resul = "Es menor de edad"
+            }
+            else {
+                resul = "No ha ingresado valores validos"
+            }
+            resultado.innerHTML = resul;
+
+            return false;
+        }
+
+    </script>
+</body>
+
+</html>
