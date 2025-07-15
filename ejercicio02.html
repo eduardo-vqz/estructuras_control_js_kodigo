@@ -14,6 +14,16 @@
     </h1>
     <form action="" class="" onsubmit="return calculo_promedio();">
         <div class="form-group">
+            <label for="nombre"> Nombre del estudiante
+                <input type="text" name="nombre" id="nombre" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="carnet"> Numero de carnet
+                <input type="text" name="carnet" id="carnet" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
             <label for="examen"> Nota del examen (20%)
                 <input type="number" name="examen" id="examen" class="form-control">
             </label>
@@ -44,25 +54,45 @@
     <script src="js/bootstrap.js"></script>
     <script>
         function calculo_promedio() {
-            var examen = parseInt(document.getElementById("examen").value);
-            var tareas = parseInt(document.getElementById("tareas").value);
-            var asistencia = parseInt(document.getElementById("asistencia").value);
-            var investigacion = parseInt(document.getElementById("investigacion").value);
-            var resultado = document.getElementById("resultado");
-            var resul;
+            const nombre = document.getElementById("nombre").value.trim();
+            const carnet = document.getElementById("carnet").value.trim();
+            const examen = parseFloat(document.getElementById("examen").value);
+            const tareas = parseFloat(document.getElementById("tareas").value);
+            const asistencia = parseFloat(document.getElementById("asistencia").value);
+            const investigacion = parseFloat(document.getElementById("investigacion").value);
+            const resultado = document.getElementById("resultado");
 
-            if (examen >= 0 && tareas >= 0 && asistencia >= 0 && investigacion >= 0) {
-                resul = examen * 0.2 + tareas * 0.4 + asistencia * 0.1 + investigacion * 0.3;
+            // Validar nombre y carnet
+            if (!nombre || !carnet) {
+                resultado.innerHTML = "Debe ingresar el nombre y el carné.";
+                return false;
             }
-            else {
-                resul = "No ha ingresado valores validos"
-            }
-            resultado.innerHTML = resul;
 
-            return false;
+            // Validar que las notas estén en el rango de 0 a 10
+            const notas = [examen, tareas, asistencia, investigacion];
+            const notasValidas = notas.every(nota => !isNaN(nota) && nota >= 0 && nota <= 10);
+
+            if (!notasValidas) {
+                resultado.innerHTML = "Todas las notas deben ser números entre 0 y 10.";
+                return false;
+            }
+
+            // Calcular promedio
+            const promedio = examen * 0.2 + tareas * 0.4 + asistencia * 0.1 + investigacion * 0.3;
+
+            // Mostrar resultado
+            resultado.innerHTML = `
+            <strong>Nombre:</strong> ${nombre}<br>
+            <strong>Carné:</strong> ${carnet}<br>
+            <strong>Promedio:</strong> ${promedio.toFixed(2)}
+        `;
+
+            return false; // Prevenir recarga del formulario si se usa en onsubmit
         }
-
     </script>
+
+
+
 </body>
 
 </html>
