@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        Calculo de nota final
+    </h1>
+    <form action="" class="" onsubmit="return calculo_promedio();">
+        <div class="form-group">
+            <label for="examen"> Nota del examen (20%)
+                <input type="number" name="examen" id="examen" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="tareas"> Nota de las tareas (40%)
+                <input type="number" name="tareas" id="tareas" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="asistencia"> Asistencia (10%)
+                <input type="number" name="asistencia" id="asistencia" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="investigacion"> Investigación (30%)
+                <input type="number" name="investigacion" id="investigacion" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Calcular promedio</button>
+
+        </div>
+    </form>
+
+    <span id="resultado"></span>
+
+    <script src="js/bootstrap.js"></script>
+    <script>
+        function calculo_promedio() {
+            var examen = parseInt(document.getElementById("examen").value);
+            var tareas = parseInt(document.getElementById("tareas").value);
+            var asistencia = parseInt(document.getElementById("asistencia").value);
+            var investigacion = parseInt(document.getElementById("investigacion").value);
+            var resultado = document.getElementById("resultado");
+            var resul;
+
+            if (examen >= 0 && tareas >= 0 && asistencia >= 0 && investigacion >= 0) {
+                resul = examen * 0.2 + tareas * 0.4 + asistencia * 0.1 + investigacion * 0.3;
+            }
+            else {
+                resul = "No ha ingresado valores validos"
+            }
+            resultado.innerHTML = resul;
+
+            return false;
+        }
+
+    </script>
+</body>
+
+</html>
