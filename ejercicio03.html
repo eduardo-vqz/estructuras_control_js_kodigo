@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        Calculo de nota final
+    </h1>
+    <form action="" class="" onsubmit="return aumento_salario();">
+        <div class="form-group">
+            <label for="nombre"> Nombre del empleado
+                <input type="text" name="nombre" id="nombre" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="salario"> Ingrese su salario
+                <input type="text" name="salario" id="salario" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="categoria"> Nombre del estudiante
+                <select name="categirua" id="categoria" class="form-control">
+                    <option value="A">Categoria A</option>
+                    <option value="B">Categoria B</option>
+                    <option value="C">Categoria C</option>
+                    <option value="D">Categoria D</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Calcular promedio</button>
+
+        </div>
+    </form>
+
+    <span id="resultado"></span>
+
+    <script src="js/bootstrap.js"></script>
+    <script>
+        function aumento_salario() {
+            const nombre = document.getElementById("nombre").value.trim();
+            const salario = parseFloat(document.getElementById("salario").value.trim());
+            const categoria = document.getElementById("categoria").value;
+            const resultado = document.getElementById("resultado");
+            var aumento = 0;
+            var porcentaje = 0;
+            var total;
+
+            if (!salario) {
+                resultado.innerHTML = "Debe ingresar el salario a calcular"
+
+            }
+            else {
+                switch (categoria) {
+                    case "A":
+                    porcentaje = 0.15;
+                        aumento = salario * porcentaje;
+                        break;
+                    case "B":
+                    porcentaje = 0.3;
+                        aumento = salario * porcentaje;
+                        break;
+                    case "C":
+                    porcentaje = 0.1;
+                        aumento = salario * porcentaje;
+                        break;
+                    case "D":
+                    porcentaje = 0.2;
+                        aumento = salario * porcentaje;
+                        break;
+                }
+
+                total = salario + aumento;
+
+                resultado.innerHTML = `<strong>Nombre:</strong> ${nombre}<br>
+                    <strong>Salario:</strong> ${salario}<br>
+                    <strong>Categoria:</strong> ${categoria}<br>
+                    <strong>Porcentaje de aumento:</strong> ${porcentaje * 100} %<br>
+                    <strong>Aumento:</strong> ${aumento.toFixed(2)}<br>
+                    <strong>Total:</strong> ${total.toFixed(2)}`;
+            }
+
+            return false; // Prevenir recarga del formulario si se usa en onsubmit
+        }
+    </script>
+
+
+
+</body>
+
+</html>
