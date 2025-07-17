@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="" class="" onsubmit="return numMayor();">
+        <div class="form-group">
+            <label for="numeroUno"> Ingrese el primer dato númerico entero
+                <input type="number" name="" id="numeroUno" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="numeroDos"> Ingrese el primer dato númerico entero
+                <input type="number" name="" id="numeroDos" class="form-control">
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Calcular edad</button>
+
+        </div>
+    </form>
+
+    <span id="resultado"></span>
+
+    <script src="js/bootstrap.js"></script>
+    <script>
+        function numMayor() {
+            var numeroUno = parseInt(document.getElementById("numeroUno").value);
+            var numeroDos = parseInt(document.getElementById("numeroDos").value);
+            var resultado = document.getElementById("resultado");
+            var resul;
+            if (numeroUno < numeroDos) {
+                resul = `El número mayor es ${numeroDos}`;
+            }
+            else if (numeroUno > numeroDos) {
+                resul = `El número mayor es ${numeroUno}`;
+            }
+            else {
+                resul = `Los números ${numeroDos} y ${numeroDos} son iguales `;
+            }
+            resultado.innerHTML = resul;
+
+            return false;
+        }
+
+    </script>
+</body>
+
+</html>
