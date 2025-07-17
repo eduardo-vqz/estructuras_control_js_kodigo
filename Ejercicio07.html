@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>^Selecciona la tabla de multiplicar que deseas generar</h1>
+    <form action="" class="" onsubmit="">
+        <div class="form-group">
+            <label for="tabla"> Tabla de multiplicar
+                <select name="modelo" id="tabla" class="form-control">
+                    <option value="">Selecciona tabla</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </label>
+        </div>
+
+    </form>
+
+    <span id="resultado"></span>
+
+    <script src="js/bootstrap.js"></script>
+    <script>
+        const tabla = document.getElementById("tabla");
+        const resultado = document.getElementById("resultado");
+
+        tabla.addEventListener("change", function () {
+            var result = "";
+            if (this.value == "") {
+                resultado.innerHTML = "Seleccione un elemento para generar una tabla de multiplicar";
+                return;
+            }
+            result += `<h2>Tabla de multiplicar de ${this.value}</h2>`
+
+            for (var i = 0; i <= 10; i++) {
+                result += `${this.value} x ${i} = ${this.value * i}<br> `;
+            }
+            resultado.innerHTML = result;
+            return false;
+        });
+
+    </script>
+
+</body>
+
+</html>
