@@ -42,8 +42,8 @@
         selectModel.addEventListener("change", function () {
             const precio = parseFloat(precioInput.value);
 
-            if (isNaN(precio) || precio <= 0) {
-                resultado.innerHTML = "Debe ingresar un precio mayor a cero.";
+            if (isNaN(precio) || precio <= 0 || this.value == "") {
+                resultado.innerHTML = "Debe ingresar un precio mayor a cero y el lugar de destino.";
                 return;
             }
 
