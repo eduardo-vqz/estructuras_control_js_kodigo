@@ -9,21 +9,21 @@
 </head>
 
 <body>
-    <h1>Consecionario de vehiculos.</h1>
+    <h1>Destinos turisticos</h1>
     <form action="" class="" onsubmit="return calcular_edad();">
         <div class="form-group">
-            <label for="precio"> Ingrese el precio del vehiculo
+            <label for="precio"> Precio de los voletos
                 <input type="number" name="" id="precio" class="form-control">
             </label>
         </div>
 
         <div class="form-group">
-            <label for="modelo"> Seleccione el modelo de su preferencia
+            <label for="modelo"> Seleccione su lugar de destido
                 <select name="modelo" id="modelo" class="form-control">
-                    <option value="">Seleccione un modelo</option>
-                    <option value="Ford Fiesta">Ford Fiesta</option>
-                    <option value="Ford Focus">Ford Focus</option>
-                    <option value="Ford Escape">Ford Escape</option>
+                    <option value="">Seleccione su destino</option>
+                    <option value="Costa del Sol">Costa del Sol</option>
+                    <option value="Panchimalco">Panchimalco</option>
+                    <option value="Puerto el Triunfo">Puerto el Triunfo</option>
 
                 </select>
             </label>
@@ -50,14 +50,14 @@
             let porcentaje = 0;
 
             switch (this.value) {
-                case "Ford Fiesta":
+                case "Costa del Sol":
                     porcentaje = 0.05;
                     break;
-                case "Ford Focus":
+                case "Panchimalco":
                     porcentaje = 0.10;
                     break;
-                case "Ford Escape":
-                    porcentaje = 0.20;
+                case "Puerto el Triunfo":
+                    porcentaje = 0.15;
                     break;
             }
 
@@ -65,7 +65,8 @@
             const total = precio - descuento;
 
             resultado.innerHTML = `
-            <p>Modelo seleccionado: <strong>${this.value}</strong></p>
+            <p>Lugar de origen: <strong>Ciudad de Palma</strong></p>
+            <p>Ciudad de destino: <strong>${this.value}</strong></p>
             <p>Precio: <strong>$${precio.toFixed(2)}</strong></p>
             <p>Descuento: <strong>$${descuento.toFixed(2)}</strong></p>
             <p>Porcentaje de descuento: <strong>${(porcentaje * 100)}%</strong></p>
