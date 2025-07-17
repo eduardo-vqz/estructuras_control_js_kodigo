@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Consecionario de vehiculos.</h1>
+    <form action="" class="" onsubmit="return calcular_edad();">
+        <div class="form-group">
+            <label for="precio"> Ingrese su edad
+                <input type="number" name="" id="precio" class="form-control">
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label for="modelo"> Ingrese su edad
+                <select name="modelo" id="modelo" class="form-control">
+                    <option value="">Seleccione un modelo</option>
+                    <option value="Ford Fiesta">Ford Fiesta</option>
+                    <option value="Ford Focus">Ford Focus</option>
+                    <option value="Ford Escape">Ford Escape</option>
+
+                </select>
+            </label>
+        </div>
+
+    </form>
+
+    <span id="resultado"></span>
+
+    <script src="js/bootstrap.js"></script>
+    <script>
+        const precioInput = document.getElementById("precio");
+        const selectModel = document.getElementById("modelo");
+        const resultado = document.getElementById("resultado");
+
+        selectModel.addEventListener("change", function () {
+            const precio = parseFloat(precioInput.value);
+
+            if (isNaN(precio) || precio <= 0) {
+                resultado.innerHTML = "Debe ingresar un precio mayor a cero.";
+                return;
+            }
+
+            let porcentaje = 0;
+
+            switch (this.value) {
+                case "Ford Fiesta":
+                    porcentaje = 0.05;
+                    break;
+                case "Ford Focus":
+                    porcentaje = 0.10;
+                    break;
+                case "Ford Escape":
+                    porcentaje = 0.20;
+                    break;
+            }
+
+            const descuento = precio * porcentaje;
+            const total = precio - descuento;
+
+            resultado.innerHTML = `
+            <p>Modelo seleccionado: <strong>${this.value}</strong></p>
+            <p>Precio: <strong>$${precio.toFixed(2)}</strong></p>
+            <p>Descuento: <strong>$${descuento.toFixed(2)}</strong></p>
+            <p>Porcentaje de descuento: <strong>${(porcentaje * 100)}%</strong></p>
+            <p>Total a pagar: <strong>$${total.toFixed(2)}</strong></p>
+        `;
+        });
+    </script>
+
+</body>
+
+</html>
