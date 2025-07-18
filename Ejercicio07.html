@@ -1,60 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de Análisis de Números</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <title>Document</title>
 </head>
+<body class="p-4">
+    <h1 class="mb-4">Ingrese 10 números enteros</h1>
 
-<body>
-    <h1>^Selecciona la tabla de multiplicar que deseas generar</h1>
-    <form action="" class="" onsubmit="">
+    <form id="formulario">
         <div class="form-group">
-            <label for="tabla"> Tabla de multiplicar
-                <select name="modelo" id="tabla" class="form-control">
-                    <option value="">Selecciona tabla</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-            </label>
+            <label for="numero">Número actual:</label>
+            <input type="number" id="numero" class="form-control" required>
         </div>
-
+        <button type="submit" class="btn btn-primary mt-2">Agregar número</button>
     </form>
 
-    <span id="resultado"></span>
+    <div class="mt-3">
+        <p><strong>Números ingresados:</strong> <span id="listaNumeros">[ ]</span></p>
+        <div id="resultado" class="mt-3"></div>
+    </div>
 
-    <script src="js/bootstrap.js"></script>
     <script>
-        const tabla = document.getElementById("tabla");
+        const formulario = document.getElementById("formulario");
+        const numeroInput = document.getElementById("numero");
         const resultado = document.getElementById("resultado");
+        const listaNumeros = document.getElementById("listaNumeros");
 
-        tabla.addEventListener("change", function () {
-            var result = "";
-            if (this.value == "") {
-                resultado.innerHTML = "Seleccione un elemento para generar una tabla de multiplicar";
+        let numeros = [];
+
+        formulario.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const valor = parseInt(numeroInput.value);
+            if (isNaN(valor)) {
+                alert("Por favor ingrese un número válido.");
                 return;
             }
-            result += `<h2>Tabla de multiplicar de ${this.value}</h2>`
 
-            for (var i = 0; i <= 10; i++) {
-                result += `${this.value} x ${i} = ${this.value * i}<br> `;
+            if (numeros.length < 10) {
+                numeros.push(valor);
+                numeroInput.value = "";
+                numeroInput.focus();
+                listaNumeros.textContent = JSON.stringify(numeros);
+
+                if (numeros.length === 10) {
+                    analizarNumeros();
+                }
+            } else {
+                alert("Ya se han ingresado 10 números.");
             }
-            resultado.innerHTML = result;
-            return false;
         });
 
+        function analizarNumeros() {
+            let negativos = 0;
+            let positivos = 0;
+            let multiplos15 = 0;
+            let sumaPares = 0;
+
+            for (const num of numeros) {
+                if (num < 0) negativos++;
+                if (num > 0) positivos++;
+                if (num % 15 === 0) multiplos15++;
+                if (num % 2 === 0) sumaPares += num;
+            }
+
+            resultado.innerHTML = `
+                <div class="alert alert-info">
+                    <p><strong>Cantidad de valores negativos:</strong> ${negativos}</p>
+                    <p><strong>Cantidad de valores positivos:</strong> ${positivos}</p>
+                    <p><strong>Cantidad de múltiplos de 15:</strong> ${multiplos15}</p>
+                    <p><strong>Suma de los números pares:</strong> ${sumaPares}</p>
+                </div>
+            `;
+        }
     </script>
-
 </body>
-
 </html>
