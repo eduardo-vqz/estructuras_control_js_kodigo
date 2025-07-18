@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Promedio de Edades por Turno</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body class="p-4">
+    <h1 class="mb-4">Registro de edades por turno</h1>
+
+    <div class="mb-4">
+        <h3>Turno Mañana (5 estudiantes)</h3>
+        <div id="maniana" class="form-group">
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <h3>Turno Tarde (6 estudiantes)</h3>
+        <div id="tarde" class="form-group">
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <h3>Turno Noche (11 estudiantes)</h3>
+        <div id="noche" class="form-group">
+        </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="calcularPromedios()">Calcular Promedios</button>
+
+    <div id="resultado" class="mt-4"></div>
+
+    <script>
+        function generarCampos(idContenedor, cantidad) {
+            const contenedor = document.getElementById(idContenedor);
+            for (let i = 1; i <= cantidad; i++) {
+                const input = document.createElement("input");
+                input.type = "number";
+                input.className = "form-control mb-2";
+                input.placeholder = `Edad estudiante ${i}`;
+                input.required = true;
+                contenedor.appendChild(input);
+            }
+        }
+
+        generarCampos("maniana", 5);
+        generarCampos("tarde", 6);
+        generarCampos("noche", 11);
+
+        function calcularPromedios() {
+            const promedio = (lista) => lista.reduce((a, b) => a + b, 0) / lista.length;
+
+            const obtenerEdades = (idContenedor) => {
+                const inputs = document.querySelectorAll(`#${idContenedor} input`);
+                return Array.from(inputs).map(input => parseInt(input.value)).filter(num => !isNaN(num));
+            };
+
+            const edadesManiana = obtenerEdades("maniana");
+            const edadesTarde = obtenerEdades("tarde");
+            const edadesNoche = obtenerEdades("noche");
+
+            if (edadesManiana.length !== 5 || edadesTarde.length !== 6 || edadesNoche.length !== 11) {
+                document.getElementById("resultado").innerHTML = `
+                    <div class="alert alert-danger">Debe completar todas las edades correctamente.</div>`;
+                return;
+            }
+
+            const promManiana = promedio(edadesManiana);
+            const promTarde = promedio(edadesTarde);
+            const promNoche = promedio(edadesNoche);
+
+            let mayorTurno = "";
+            let mayorValor = Math.max(promManiana, promTarde, promNoche);
+
+            if (mayorValor === promManiana) mayorTurno = "Turno Mañana";
+            else if (mayorValor === promTarde) mayorTurno = "Turno Tarde";
+            else mayorTurno = "Turno Noche";
+
+            document.getElementById("resultado").innerHTML = `
+                <div class="alert alert-info">
+                    <p><strong>Promedio Turno Mañana:</strong> ${promManiana.toFixed(2)}</p>
+                    <p><strong>Promedio Turno Tarde:</strong> ${promTarde.toFixed(2)}</p>
+                    <p><strong>Promedio Turno Noche:</strong> ${promNoche.toFixed(2)}</p>
+                    <hr>
+                    <p><strong>Turno con mayor promedio de edad:</strong> ${mayorTurno}</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

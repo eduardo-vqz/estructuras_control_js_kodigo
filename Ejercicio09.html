@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversión de Temperatura</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body class="p-4">
+    <h1 class="mb-4">Conversor de Temperatura (Celsius → Fahrenheit)</h1>
+
+    <form id="formTemp">
+        <div class="form-group">
+            <label for="celsius">Temperatura en °C:</label>
+            <input type="number" id="celsius" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success mt-2">Convertir</button>
+    </form>
+
+    <div id="resultado" class="mt-4"></div>
+
+    <script>
+        const form = document.getElementById("formTemp");
+        const celsiusInput = document.getElementById("celsius");
+        const resultado = document.getElementById("resultado");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const celsius = parseFloat(celsiusInput.value);
+            if (isNaN(celsius)) {
+                resultado.innerHTML = `<div class="alert alert-danger">Por favor, ingrese una temperatura válida.</div>`;
+                return;
+            }
+
+            const fahrenheit = (celsius * 9 / 5) + 32;
+            let mensaje = "";
+
+            if (fahrenheit >= 14 && fahrenheit < 32) {
+                mensaje = "Temperatura baja";
+            } else if (fahrenheit >= 32 && fahrenheit < 68) {
+                mensaje = "Temperatura adecuada";
+            } else if (fahrenheit >= 68 && fahrenheit < 96) {
+                mensaje = "Temperatura alta";
+            } else {
+                mensaje = "Temperatura desconocida";
+            }
+
+            resultado.innerHTML = `
+                <div class="alert alert-info">
+                    <p><strong>Celsius:</strong> ${celsius.toFixed(2)} °C</p>
+                    <p><strong>Fahrenheit:</strong> ${fahrenheit.toFixed(2)} °F</p>
+                    <p><strong>Resultado:</strong> ${mensaje}</p>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
